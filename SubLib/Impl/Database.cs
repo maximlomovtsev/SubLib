@@ -16,8 +16,8 @@ namespace SubLib.Impl
             if(!File.Exists(name))
             {
                 SQLiteConnection.CreateFile(name);
-                _connection = new SQLiteConnection($"Data Source={name};Version=3;");
             }
+            _connection = new SQLiteConnection($"Data Source={name};Version=3;");
         }
 
         public DatabaseStatus Open()
