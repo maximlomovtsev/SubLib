@@ -15,42 +15,42 @@ namespace SubLib.Impl
             _database = database;
         }
 
-        public SubsribeStatus GetSubscribersCount(out long subscribersCount)
+        public SubsribeSystemStatus GetSubscribersCount(out long subscribersCount)
         {
             var status = _database.RowCount(out subscribersCount);
 
             return (status == DatabaseStatus.OK)
-                ? SubsribeStatus.OK
-                : SubsribeStatus.Fail;
+                ? SubsribeSystemStatus.OK
+                : SubsribeSystemStatus.Fail;
         }
 
-        public SubsribeStatus Subscribe(ISubscriber subscriber)
+        public SubsribeSystemStatus Subscribe(ISubscriber subscriber)
         {
             var isExists = false;
             if(_database.IsExists(subscriber, out isExists) == DatabaseStatus.Fail)
             {
-                return SubsribeStatus.Fail;
+                return SubsribeSystemStatus.Fail;
             }
 
             if(isExists)
             {
-                return SubsribeStatus.OK;
+                return SubsribeSystemStatus.AlreadySubscribed;
             }
 
             var status = _database.Insert(subscriber);
 
             return (status == DatabaseStatus.OK)
-                ? SubsribeStatus.OK
-                : SubsribeStatus.Fail;
+                ? SubsribeSystemStatus.OK
+                : SubsribeSystemStatus.Fail;
         }
 
-        public SubsribeStatus Unsubscribe(ISubscriber subscriber)
+        public SubsribeSystemStatus Unsubscribe(ISubscriber subscriber)
         {
             var status = _database.Delete(subscriber);
 
             return (status == DatabaseStatus.OK)
-                ? SubsribeStatus.OK
-                : SubsribeStatus.Fail;
+                ? SubsribeSystemStatus.OK
+                : SubsribeSystemStatus.Fail;
         }
     }
 }

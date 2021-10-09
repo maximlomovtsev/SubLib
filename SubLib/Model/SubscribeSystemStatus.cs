@@ -4,9 +4,10 @@ using System.Text;
 
 namespace SubLib.Model
 {
-    public enum SubsribeStatus
+    public enum SubsribeSystemStatus
     {
         OK = 0,
+        AlreadySubscribed,
         Fail
     }
 }
