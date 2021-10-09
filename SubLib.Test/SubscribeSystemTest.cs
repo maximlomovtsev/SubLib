@@ -9,10 +9,11 @@ namespace SubLib.Test
     public class SubscribeSystemTest
     {
         [Theory]
-        [InlineData(3)]
-        public void GetSubscribersCount(int subscribeCount)
+        [InlineData(3, "SubscribeSystemTestDatabase.sqlite")]
+        public void GetSubscribersCount(int subscribeCount, string databaseName)
         {
-            var subsribeSystem = new SubscribeSystem();
+            var database = new Database(databaseName);
+            var subsribeSystem = new SubscribeSystem(database);
 
             List<ISubscriber> subscribers = new List<ISubscriber>();
             for(var i = 0; i < subscribeCount; ++i)
