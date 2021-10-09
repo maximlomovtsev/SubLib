@@ -9,23 +9,37 @@ namespace SubLib.Test
     public class SubscribeSystemTest
     {
         [Theory]
-        [InlineData(3, "SubscribeSystemTestDatabase.sqlite")]
-        public void GetSubscribersCount(int subscribeCount, string databaseName)
+        [InlineData("SubscribeSystemTestDatabase.sqlite")]
+        public void GetSubscribersCount(string databaseName)
         {
             var database = new Database(databaseName);
             var subsribeSystem = new SubscribeSystem(database);
 
             List<ISubscriber> subscribers = new List<ISubscriber>();
-            for(var i = 0; i < subscribeCount; ++i)
-            {
-                var subscriber = new Subscriber();
-                subscriber.TelegramId = 0;
-                subscriber.TelegramUsername = "User";
-                subscriber.SubscriptionStartDate = new DateTime(1);
-                subscriber.SubscriptionExpirationDate = new DateTime(2);
 
-                subscribers.Add(subscriber);
-            }
+            // First subscriber
+            var firstSubscriber = new Subscriber();
+            firstSubscriber.TelegramId = 1;
+            firstSubscriber.TelegramUsername = "First User";
+            firstSubscriber.SubscriptionStartDate = new DateTime(1);
+            firstSubscriber.SubscriptionExpirationDate = new DateTime(2);
+            subscribers.Add(firstSubscriber);
+
+            // Second subscriber
+            var secondSubscriber = new Subscriber();
+            secondSubscriber.TelegramId = 2;
+            secondSubscriber.TelegramUsername = "Second User";
+            secondSubscriber.SubscriptionStartDate = new DateTime(1);
+            secondSubscriber.SubscriptionExpirationDate = new DateTime(2);
+            subscribers.Add(secondSubscriber);
+
+            // Third subscriber
+            var thirdSubscriber = new Subscriber();
+            thirdSubscriber.TelegramId = 3;
+            thirdSubscriber.TelegramUsername = "Third User";
+            thirdSubscriber.SubscriptionStartDate = new DateTime(1);
+            thirdSubscriber.SubscriptionExpirationDate = new DateTime(2);
+            subscribers.Add(thirdSubscriber);
 
             foreach(var subscriber in subscribers)
             {
@@ -34,7 +48,7 @@ namespace SubLib.Test
 
             long subscribersCount = 0;
             subsribeSystem.GetSubscribersCount(out subscribersCount);
-            Assert.Equal(subscribersCount, subscribeCount);
+            Assert.Equal(subscribersCount, subscribers.Count);
 
             foreach (var subscriber in subscribers)
             {

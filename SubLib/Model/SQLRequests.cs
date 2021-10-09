@@ -20,6 +20,8 @@ namespace SubLib.Model
 
         public static string DeleteFrom = @"DELETE FROM Users WHERE TelegramId = @TelegramId";
 
-        public static string RowCount = @"SELECT COUNT(Id) FROM Users";
+        public static string RowCount = @"SELECT COUNT(*) FROM Users";
+
+        public static string IsExists = @"SELECT COUNT(*) FROM Users WHERE TelegramId = @TelegramId";
     }
 }

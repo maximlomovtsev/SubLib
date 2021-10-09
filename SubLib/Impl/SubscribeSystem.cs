@@ -26,6 +26,17 @@ namespace SubLib.Impl
 
         public SubsribeStatus Subscribe(ISubscriber subscriber)
         {
+            var isExists = false;
+            if(_database.IsExists(subscriber, out isExists) == DatabaseStatus.Fail)
+            {
+                return SubsribeStatus.Fail;
+            }
+
+            if(isExists)
+            {
+                return SubsribeStatus.OK;
+            }
+
             var status = _database.Insert(subscriber);
 
             return (status == DatabaseStatus.OK)

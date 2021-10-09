@@ -69,6 +69,26 @@ namespace SubLib.Impl
             }
         }
 
+        public DatabaseStatus IsExists(ISubscriber subscriber, out bool isExists)
+        {
+            try
+            {
+                var command = new SQLiteCommand(SQLRequests.IsExists, _connection);
+
+                command.Parameters.AddWithValue("@TelegramId", subscriber.TelegramId);
+
+                var rowCount = (long)command.ExecuteScalar();
+                isExists = (rowCount > 0);
+
+                return DatabaseStatus.OK;
+            }
+            catch (Exception)
+            {
+                isExists = false;
+                return DatabaseStatus.Fail;
+            }
+        }
+
         public DatabaseStatus RowCount(out long rowCount)
         {
             try
