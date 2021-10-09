@@ -2,6 +2,7 @@ using SubLib.Impl;
 using SubLib.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Xunit;
 
 namespace SubLib.Test
@@ -9,8 +10,8 @@ namespace SubLib.Test
     public class SubscribeSystemTest
     {
         [Theory]
-        [InlineData("SubscribeSystemTestDatabase.sqlite")]
-        public void GetSubscribersCount(string databaseName)
+        [InlineData("SubscribeUnsubscribeTestDatabase.sqlite")]
+        public void SubscribeUnsubscribe(string databaseName)
         {
             var database = new Database(databaseName);
             var subsribeSystem = new SubscribeSystem(database);
