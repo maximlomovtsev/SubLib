@@ -10,10 +10,13 @@ namespace SubLib.Model
                 "(" +
                 "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "TelegramId INTEGER," +
-                "TelegramUsername NVARCHAR(50)" +
+                "TelegramUsername NVARCHAR(50)," +
+                "SubscriptionStartDate INTEGER," +
+                "SubscriptionExpirationDate INTEGER" +
                 ");";
 
-        public static string InsertInto = @"INSERT INTO Users (TelegramId, TelegramUsername) VALUES (@TelegramId, @TelegramUsername)";
+        public static string InsertInto = @"INSERT INTO Users (TelegramId, TelegramUsername, SubscriptionStartDate, SubscriptionExpirationDate) " +
+            "VALUES (@TelegramId, @TelegramUsername, @SubscriptionStartDate, @SubscriptionExpirationDate)";
 
         public static string DeleteFrom = @"DELETE FROM Users WHERE TelegramId = @TelegramId";
 

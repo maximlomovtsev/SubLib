@@ -21,6 +21,8 @@ namespace SubLib.Test
                 var subscriber = new Subscriber();
                 subscriber.TelegramId = 0;
                 subscriber.TelegramUsername = "User";
+                subscriber.SubscriptionStartDate = new DateTime(1);
+                subscriber.SubscriptionExpirationDate = new DateTime(2);
 
                 subscribers.Add(subscriber);
             }

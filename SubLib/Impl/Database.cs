@@ -56,6 +56,8 @@ namespace SubLib.Impl
 
                 command.Parameters.AddWithValue("@TelegramId", subscriber.TelegramId);
                 command.Parameters.AddWithValue("@TelegramUsername", subscriber.TelegramUsername);
+                command.Parameters.AddWithValue("@SubscriptionStartDate", subscriber.SubscriptionStartDate.Ticks);
+                command.Parameters.AddWithValue("@SubscriptionExpirationDate", subscriber.SubscriptionExpirationDate.Ticks);
 
                 command.ExecuteNonQuery();
 
