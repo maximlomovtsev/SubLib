@@ -7,7 +7,9 @@ namespace SubLib.Interfaces
 {
     public interface IDatabase
     {
-        DatabaseStatus Open();
-        DatabaseStatus Close();
+        DatabaseStatus Insert(ISubscriber subscriber);
+        DatabaseStatus Delete(ISubscriber subscriber);
+        DatabaseStatus RowCount(out long rowCount);
+
     }
 }

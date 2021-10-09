@@ -18,7 +18,11 @@ namespace SubLib.Test
             List<ISubscriber> subscribers = new List<ISubscriber>();
             for(var i = 0; i < subscribeCount; ++i)
             {
-                subscribers.Add(new Subscriber());
+                var subscriber = new Subscriber();
+                subscriber.TelegramId = 0;
+                subscriber.TelegramUsername = "User";
+
+                subscribers.Add(subscriber);
             }
 
             foreach(var subscriber in subscribers)
@@ -26,7 +30,8 @@ namespace SubLib.Test
                 subsribeSystem.Subscribe(subscriber);
             }
 
-            var subscribersCount = subsribeSystem.GetSubscribersCount();
+            long subscribersCount = 0;
+            subsribeSystem.GetSubscribersCount(out subscribersCount);
             Assert.Equal(subscribersCount, subscribeCount);
 
             foreach (var subscriber in subscribers)
@@ -34,8 +39,8 @@ namespace SubLib.Test
                 subsribeSystem.Unsubscribe(subscriber);
             }
 
-            subscribersCount = subsribeSystem.GetSubscribersCount();
-            Assert.Equal(subscribersCount, 0);
+            subsribeSystem.GetSubscribersCount(out subscribersCount);
+            Assert.Equal(0, subscribersCount);
         }
     }
 }

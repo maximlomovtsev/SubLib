@@ -5,7 +5,7 @@ namespace SubLib.Interfaces
 {
     public interface ISubscribeSystem
     {
-        long GetSubscribersCount();
+        SubsribeStatus GetSubscribersCount(out long subscribersCount);
         SubsribeStatus Subscribe(ISubscriber subscriber);
         SubsribeStatus Unsubscribe(ISubscriber subscriber);
     }

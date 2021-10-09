@@ -6,7 +6,8 @@ namespace SubLib.Interfaces
 {
     public interface ISubscriber
     {
-        long Id { get; set; }
+        long TelegramId { get; set; }
+        string TelegramUsername { get; set; }
         DateTime SubscriptionStartDate { get; set; }
         DateTime SubscriptionExpirationDate { get; set; }
     }

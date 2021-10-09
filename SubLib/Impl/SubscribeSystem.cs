@@ -13,31 +13,33 @@ namespace SubLib.Impl
         public SubscribeSystem(IDatabase database)
         {
             _database = database;
-
-            if(_database.Open() == DatabaseStatus.Fail)
-            {
-                throw new Exception("Failed open database");
-            }
         }
 
-        ~SubscribeSystem()
+        public SubsribeStatus GetSubscribersCount(out long subscribersCount)
         {
-            _database.Close();
-        }
+            var status = _database.RowCount(out subscribersCount);
 
-        public long GetSubscribersCount()
-        {
-            throw new NotImplementedException();
+            return (status == DatabaseStatus.OK)
+                ? SubsribeStatus.OK
+                : SubsribeStatus.Fail;
         }
 
         public SubsribeStatus Subscribe(ISubscriber subscriber)
         {
-            throw new NotImplementedException();
+            var status = _database.Insert(subscriber);
+
+            return (status == DatabaseStatus.OK)
+                ? SubsribeStatus.OK
+                : SubsribeStatus.Fail;
         }
 
         public SubsribeStatus Unsubscribe(ISubscriber subscriber)
         {
-            throw new NotImplementedException();
+            var status = _database.Delete(subscriber);
+
+            return (status == DatabaseStatus.OK)
+                ? SubsribeStatus.OK
+                : SubsribeStatus.Fail;
         }
     }
 }
