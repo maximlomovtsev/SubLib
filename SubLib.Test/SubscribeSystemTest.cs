@@ -41,14 +41,22 @@ namespace SubLib.Test
             thirdSubscriber.SubscriptionExpirationDate = new DateTime(2);
             subscribers.Add(thirdSubscriber);
 
-            foreach(var subscriber in subscribers)
+            // Third subscriber (duplicate)
+            var thirdSubscriberDuplicate = new Subscriber();
+            thirdSubscriberDuplicate.TelegramId = 3;
+            thirdSubscriberDuplicate.TelegramUsername = "Third User";
+            thirdSubscriberDuplicate.SubscriptionStartDate = new DateTime(1);
+            thirdSubscriberDuplicate.SubscriptionExpirationDate = new DateTime(2);
+            subscribers.Add(thirdSubscriberDuplicate);
+
+            foreach (var subscriber in subscribers)
             {
                 subsribeSystem.Subscribe(subscriber);
             }
 
             long subscribersCount = 0;
             subsribeSystem.GetSubscribersCount(out subscribersCount);
-            Assert.Equal(subscribersCount, subscribers.Count);
+            Assert.True(subscribers.Count > subscribersCount);
 
             foreach (var subscriber in subscribers)
             {
