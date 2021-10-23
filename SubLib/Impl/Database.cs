@@ -105,5 +105,36 @@ namespace SubLib.Impl
                 return DatabaseStatus.Fail;
             }
         }
+
+        public DatabaseStatus Select(long count, out List<ISubscriber> subscribers)
+        {
+            try
+            {
+                var command = new SQLiteCommand(SQLRequests.Select, _connection);
+
+                command.Parameters.AddWithValue("@subscribersCount", count);
+
+                var databaseSubscribers = new List<ISubscriber>();
+                var reader = command.ExecuteReader();
+                while(reader.Read())
+                {
+                    var subscriber = new Subscriber();
+                    subscriber.TelegramId = Convert.ToInt64(reader[@"TelegramId"]);
+                    subscriber.TelegramUsername = Convert.ToString(reader[@"TelegramUsername"]);
+                    subscriber.SubscriptionStartDate = new DateTime(Convert.ToInt64(reader[@"SubscriptionStartDate"]));
+                    subscriber.SubscriptionExpirationDate = new DateTime(Convert.ToInt64(reader[@"SubscriptionExpirationDate"]));
+
+                    databaseSubscribers.Add(subscriber);
+                }
+                subscribers = databaseSubscribers;
+
+                return DatabaseStatus.OK;
+            }
+            catch (Exception)
+            {
+                subscribers = null;
+                return DatabaseStatus.Fail;
+            }
+        }
     }
 }

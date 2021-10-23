@@ -23,5 +23,7 @@ namespace SubLib.Model
         public static string RowCount = @"SELECT COUNT(*) FROM Users";
 
         public static string IsExists = @"SELECT COUNT(*) FROM Users WHERE TelegramId = @TelegramId";
+
+        public static string Select = @"SELECT * FROM Users LIMIT @subscribersCount";
     }
 }

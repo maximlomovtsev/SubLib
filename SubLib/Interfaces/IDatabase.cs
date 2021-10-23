@@ -11,6 +11,6 @@ namespace SubLib.Interfaces
         DatabaseStatus Insert(ISubscriber subscriber);
         DatabaseStatus Delete(ISubscriber subscriber);
         DatabaseStatus RowCount(out long rowCount);
-
+        DatabaseStatus Select(long count, out List<ISubscriber> subscribers);
     }
 }

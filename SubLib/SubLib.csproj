@@ -1,9 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>1.0.3</Version>
+    <Version>1.0.6</Version>
     <Authors>maximlomovtsev</Authors>
+    <RepositoryUrl>https://github.com/maximlomovtsev1902/SubLib</RepositoryUrl>
+    <RepositoryType>Public</RepositoryType>
+    <Description>Subscription library. SQLite is used to store data</Description>
   </PropertyGroup>
 
   <ItemGroup>

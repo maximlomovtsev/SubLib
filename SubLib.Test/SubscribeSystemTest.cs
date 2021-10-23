@@ -1,5 +1,6 @@
 using SubLib.Impl;
 using SubLib.Interfaces;
+using SubLib.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -56,15 +57,19 @@ namespace SubLib.Test
             }
 
             long subscribersCount = 0;
-            subsribeSystem.GetSubscribersCount(out subscribersCount);
+            Assert.Equal(SubsribeSystemStatus.OK, subsribeSystem.GetSubscribersCount(out subscribersCount));
             Assert.True(subscribers.Count > subscribersCount);
+
+            var subscribersInDatabase = new List<ISubscriber>();
+            Assert.Equal(SubsribeSystemStatus.OK, subsribeSystem.GetSubscribers(subscribersCount, out subscribersInDatabase));
+            Assert.Equal(subscribersCount, subscribersInDatabase.Count);
 
             foreach (var subscriber in subscribers)
             {
-                subsribeSystem.Unsubscribe(subscriber);
+                Assert.Equal(SubsribeSystemStatus.OK, subsribeSystem.Unsubscribe(subscriber));
             }
 
-            subsribeSystem.GetSubscribersCount(out subscribersCount);
+            Assert.Equal(SubsribeSystemStatus.OK, subsribeSystem.GetSubscribersCount(out subscribersCount));
             Assert.Equal(0, subscribersCount);
         }
     }

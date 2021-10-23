@@ -15,6 +15,15 @@ namespace SubLib.Impl
             _database = database;
         }
 
+        public SubsribeSystemStatus GetSubscribers(long count, out List<ISubscriber> subscribers)
+        {
+            var status = _database.Select(count, out subscribers);
+
+            return (status == DatabaseStatus.OK)
+                ? SubsribeSystemStatus.OK
+                : SubsribeSystemStatus.Fail;
+        }
+
         public SubsribeSystemStatus GetSubscribersCount(out long subscribersCount)
         {
             var status = _database.RowCount(out subscribersCount);
